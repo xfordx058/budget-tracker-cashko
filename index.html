@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CashKo — Student Budget Tracker</title>
+  <meta name="theme-color" content="#FFD02F">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="headleft">
+        <div class="logo" id="logo">CashKo</div>
+        <div class="greet" id="greet">Hello, <b>Student</b></div>
+      </div>
+      <div class="headright">
+        <div class="month" id="month"></div>
+        <button class="gearbtn" id="btnSettings">Settings</button>
+      </div>
+    </header>
+
+    <div class="hero">
+      <div class="label">Remaining Budget</div>
+      <div class="amount" id="balance">₱0.00</div>
+      <div class="row">
+        <div class="stat in"><div class="v" id="income">+₱0.00</div><div class="l">Income</div></div>
+        <div class="stat out"><div class="v" id="expense">−₱0.00</div><div class="l">Spent</div></div>
+      </div>
+    </div>
+
+    <div class="budget" id="budgetCard" title="Click to edit budget">
+      <div class="top"><span>MONTHLY BUDGET</span><span id="btxt"></span></div>
+      <div class="bar"><i id="bfill"></i></div>
+    </div>
+
+    <div class="chartcard">
+      <div class="label">LAST 7 DAYS — NET FLOW</div>
+      <canvas id="chart" height="110"></canvas>
+    </div>
+
+    <form id="form" autocomplete="off">
+      <div class="tabs">
+        <button type="button" id="tabExp" class="on exp">− EXPENSE</button>
+        <button type="button" id="tabInc">+ INCOME</button>
+      </div>
+      <div class="frow">
+        <input id="desc" placeholder="Description" required maxlength="30">
+        <input id="amt" type="number" placeholder="0.00" min="0.01" step="0.01" required style="max-width:120px">
+      </div>
+      <div class="frow" style="margin-top:8px">
+        <select id="cat"></select>
+        <input id="date" type="date" required>
+      </div>
+      <button type="submit" class="submit">Add Transaction</button>
+    </form>
+
+    <div class="listhead">
+      <h2>History</h2>
+      <div class="filters">
+        <button data-f="all" class="on">All</button>
+        <button data-f="inc">In</button>
+        <button data-f="exp">Out</button>
+      </div>
+    </div>
+    <ul id="list"></ul>
+
+    <div class="databar">
+      <button class="b-pdf" id="btnPdf">Export PDF</button>
+      <button class="b-json" id="btnJson">Backup File</button>
+      <button class="b-import" id="btnImport">Restore</button>
+      <button class="b-clear" id="btnClear">Clear All</button>
+    </div>
+    <input type="file" id="fileInput" accept=".json,application/json" hidden>
+    <footer>CashKo — Track Every Peso</footer>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="modal" role="dialog" aria-modal="true">
+      <h3 id="mTitle"></h3>
+      <p id="mMsg"></p>
+      <div id="mFields"></div>
+      <div class="mrow">
+        <button class="m-cancel" id="mCancel">Cancel</button>
+        <button class="m-ok" id="mOk">Confirm</button>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <script src="lib/jspdf.umd.min.js"></script>
+  <script src="lib/jspdf.plugin.autotable.min.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
